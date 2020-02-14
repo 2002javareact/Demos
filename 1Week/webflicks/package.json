@@ -4,16 +4,19 @@
   "description": "Def not a netflix knockoff",
   "main": "index.ts",
   "scripts": {
+    "start": "nodemon --exec ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "2002JavaReact",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.2",
+    "nodemon": "^2.0.2",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1"
   }
 }
