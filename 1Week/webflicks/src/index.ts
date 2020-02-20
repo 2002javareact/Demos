@@ -20,6 +20,8 @@ app.use(loggingMiddleware)
 
 app.use(sessionMiddleware)
 
+
+
 // this will register all http requests that match /users
 // and redirect them to the userRouter
 app.use('/users', userRouter)
@@ -34,7 +36,7 @@ app.post('/login', (req,res)=>{
     } else {
         try {
             let user = findUserByUsernameAndPassword(username,password)
-            req.session.user = user
+            req.session.user = user// adds an object for us to use for auth
             res.status(200).json(user)// we do this for ourselves, when we start working on front end
         } catch(e){
             res.status(e.status).send(e.message)
