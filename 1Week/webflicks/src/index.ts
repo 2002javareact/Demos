@@ -3,9 +3,7 @@ import * as bodyparser from 'body-parser'
 import { loggingMiddleware } from './middleware/logging-middleware'
 import { userRouter } from './routers/user-router'
 import { sessionMiddleware } from './middleware/session-middleware'
-import { users } from './database'
-import { HttpError } from './errors/HttpError'
-import { BadCredentialsError } from './errors/BadCredentialsError'
+import { findUserByUsernameAndPassword} from './services/user-service'
 // I call this express function, and it returns an object I can use to build my api
 const app = express()
 
@@ -27,7 +25,7 @@ app.use(sessionMiddleware)
 app.use('/users', userRouter)
 
 
-app.post('/login', (req,res)=>{
+app.post('/login', async (req,res)=>{
     //step one, get data from user
     const {username, password} = req.body
     //step two, validate that data
@@ -35,7 +33,7 @@ app.post('/login', (req,res)=>{
         res.status(400).send('Please Include Username and Password')
     } else {
         try {
-            let user = findUserByUsernameAndPassword(username,password)
+            let user = await findUserByUsernameAndPassword(username,password)
             req.session.user = user// adds an object for us to use for auth
             res.status(200).json(user)// we do this for ourselves, when we start working on front end
         } catch(e){
@@ -44,17 +42,6 @@ app.post('/login', (req,res)=>{
     }
 })
 
-// we seperated out the concern of finding the appropriate user from our controller
-// this means in the future, when we rewrite this method, we shouldn't have to change the function that is calling it
-// by seperating these concerns we are loosly coupling our code
-function findUserByUsernameAndPassword(username:string, password:string){
-    for(let user of users){
-        if(user.username === username && user.password === password){
-            return user
-        }
-    }
-    throw new BadCredentialsError()
-}
 
 
 //I can change the order of my endpoints

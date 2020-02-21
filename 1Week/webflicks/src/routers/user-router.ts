@@ -1,5 +1,4 @@
 import * as express from 'express'
-import { users } from '../database'
 import { User } from '../models/User'
 import { authAdminMiddleware, authUserMiddleware, authFactory, authCheckId } from '../middleware/auth-midleware'
 
@@ -14,7 +13,7 @@ userRouter.get('', [authFactory(['Admin']), (req,res)=>{
     //get all of our users
     //format them to json
     //use the response obj to send them back
-    res.json(users)// this will format the object into json and send it back
+    res.json([])// this will format the object into json and send it back
     
 }])
 
@@ -27,7 +26,7 @@ userRouter.post('', authFactory(['Admin']), (req,res)=>{
     role } = req.body// this will be where the data the sent me is
     // the downside is this is by default just a string of json, not a js object
     if(username && password && emailAddress && id && firstName && lastName && role){
-        users.push(new User(username,password,emailAddress,id,firstName,lastName,role))
+        [].push(new User(username,password,emailAddress,id,firstName,lastName,role))
         // this would be some function for adding a new user to a db
         res.sendStatus(201)// if I don't need to seend a body
     } else {
@@ -46,7 +45,7 @@ userRouter.get('/:id', authFactory(['Admin', 'User']), authCheckId, (req,res)=>{
     }else {
         // look through the "database"
         let found = false
-        for(let user of users){
+        for(let user of []){
             //find the matching id
             if(user.id === id){
                 //return the user
