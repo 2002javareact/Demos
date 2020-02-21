@@ -52,8 +52,10 @@ export const authFactory = (roles:string[]) => {
 export const authCheckId= (req,res,next) => {
     //TODO
     // Allow through automatically, people that aren't users
-
-    if(req.session.user.id === +req.params.id ){
+    
+    if(req.session.user.role === 'Admin'){
+        next()
+    }else if(req.session.user.id === +req.params.id ){
         next()
     } else {
         res.status(403).send('You are UnAuthorized for this endpoint')
