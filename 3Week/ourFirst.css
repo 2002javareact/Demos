@@ -1,0 +1,17 @@
+:root {
+    --rev-main-color: #f26925;
+}
+
+
+
+table {
+    border: 1px dashed rgb(10,2,255);
+}
+
+section {
+    border: 2px solid var(--rev-main-color);
+    margin-right: 10vw;
+    margin-left: 10vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
