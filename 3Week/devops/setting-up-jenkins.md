@@ -1,0 +1,44 @@
+## Connecting to ec2 again
+- use the connect statement from aws ec2 dashboard
+- use it in the same directory as your key
+- sudo yum install git
+- then use git to clone https://github.com/Abatson/dev-ops-script.git
+- then execute the install.sh script
+- run bash install.sh
+- hit enter for the two prompts
+- open up security group rule for inbound on port 8080
+- find ec2 ip
+- put ec2ip:8080 into your browser
+### Unlocking Jenkins
+- after going to jenkins in browser
+- run sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+- provide this key to the jenkins site to set up your account
+- install recommended plugins
+- make your first admin user
+- accept default address
+- click start using jenkins
+### Making a jenkins job
+- give it a name
+- choose pipeline
+- under github project, put the project clone link
+- check github hook trigger under build triggers
+- go to github project
+- go to settings
+- go to webhooks
+- add a webhook
+- for paylod url, put http://ec2ip:8080/github-webhook/
+- look in demos week 3 for the jenkinsfile
+- copy that file and paste in or point jenkins to the jenkinsfile
+- check this project is parameterized
+- set parameters (string params) to the values in the jenkinsfile on the right
+- change names in environment for jenkinsfile to your env names for your api
+### Tips for making jenkins work
+- make sure you have params set for everything
+- make sure you have a deploy script in your project
+- make sure port in ec2 security group is open on your node port
+- make sure ec2 security group can send inbound to rds security group
+- //sh nohup npm run deploy & and un comment sh npm run deploy
+- this will allow you to see logs in console.log while the app is running
+- don't forget to undo once you fix the problem
+- Actual best practice, is have api us log4js to write logs to a file instead of console, thn you can keep the nohup & deploy
+- if you have trouble getting the logs, you can click on the down arrow on the build orb, and show console output
