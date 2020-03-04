@@ -1,4 +1,5 @@
 import React from 'react';
+import {  RouteComponentProps } from 'react-router-dom';
 
 //to make a class component, we extend React.component
 
@@ -10,7 +11,7 @@ import React from 'react';
 
 // the two generics in react.component are for setting types of props and state
 // we generally give them an interface that defines what must be passed in
-interface IMessageComponentProps{
+interface IMessageComponentProps extends RouteComponentProps{
     message:string
 }
 

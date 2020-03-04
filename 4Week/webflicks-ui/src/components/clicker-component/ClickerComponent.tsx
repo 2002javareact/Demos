@@ -8,7 +8,7 @@ export class ClickerComponent extends React.Component<any,any>{
     constructor(props:any){
         super(props)
         this.state = {
-            clicks:0
+            clicks:1000
         }
     }
 
@@ -25,10 +25,20 @@ export class ClickerComponent extends React.Component<any,any>{
         // when we hit 10,000 clicks add a button for +100
         // 100,000 add a button for +1000
         // do this forever
-        let buttons = [
-            <ButtonDisplayComponent incrementClick={()=>this.incrementClicks(1)} name={'Click +1'}/>,
-            <ButtonDisplayComponent incrementClick={()=>this.incrementClicks(10)} name={'Click +10'}/>
-        ]
+        let buttons = []
+
+        for(let i = 1; i < Math.floor(this.state.clicks/100); i*=10){
+            console.log(i)
+            buttons.push(
+                <ButtonDisplayComponent 
+                    key={"key" + i}
+                    incrementClick={()=>this.incrementClicks(i)}
+                    name={`Click +${Math.floor(i)}`}
+                />
+            )
+        }
+
+        
 
         return(
             <div style={{border:"2px solid black"}}>

@@ -7,7 +7,7 @@ interface IButtonDisplayProps{
 }
 
 
-export class ButtonDisplayComponent extends React.Component<IButtonDisplayProps,any>{
+export class ButtonDisplayComponent extends React.PureComponent<IButtonDisplayProps>{
 
     render(){
         return(
