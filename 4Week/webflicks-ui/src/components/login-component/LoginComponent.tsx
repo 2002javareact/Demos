@@ -1,9 +1,16 @@
 import React, { SyntheticEvent } from 'react'
 import { Form, FormGroup, Label, Col, Input, Button } from 'reactstrap'
 import { webflicksLogin } from '../../remote/webflicks/login-webflicks'
+import { User } from '../../models/User'
 
+interface ILoginState{
+    username:string
+    password:string
+    errorMessage:string
+    user:User|undefined
+}
 
-export class LoginComponent extends React.Component<any, any>{
+export class LoginComponent extends React.Component<any, ILoginState>{
     constructor(props:any){
         super(props)
         this.state = {

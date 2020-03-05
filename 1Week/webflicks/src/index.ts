@@ -4,6 +4,7 @@ import { loggingMiddleware } from './middleware/logging-middleware'
 import { userRouter } from './routers/user-router'
 import { sessionMiddleware } from './middleware/session-middleware'
 import { findUserByUsernameAndPassword} from './services/user-service'
+import { corsFilter } from './middleware/cors-filter'
 // I call this express function, and it returns an object I can use to build my api
 const app = express()
 
@@ -17,7 +18,7 @@ app.use('/', bodyparser.json())
 app.use(loggingMiddleware)
 
 app.use(sessionMiddleware)
-
+app.use(corsFilter)
 
 
 // this will register all http requests that match /users
@@ -41,6 +42,7 @@ app.post('/login', async (req,res)=>{
         }
     }
 })
+
 
 
 
