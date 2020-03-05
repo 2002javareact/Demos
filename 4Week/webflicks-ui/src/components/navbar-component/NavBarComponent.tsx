@@ -44,7 +44,7 @@ const NavBarComponent = (props:any) => {
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  Reset
+                <Link to='/chucknorris'>ChuckNorrisJokes</Link>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

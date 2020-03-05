@@ -7,6 +7,8 @@ import { ClickerComponent } from './components/clicker-component/ClickerComponen
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MultiRouteComponent } from './components/multi-route-component/MultiRouteComponent';
 import NavBarComponent from './components/navbar-component/NavBarComponent';
+import { ChuckNorrisJokeComponent } from './components/chuck-norris-component/ChuckNorrisJokeComponent';
+import { LoginComponent } from './components/login-component/LoginComponent';
 
 // 1 a component is either a function or a class
 // 2 a component must start with a capital letter
@@ -32,6 +34,8 @@ function App() {
             <AddingComponent x={10} y={100} />
           </Route>
           <Route path='/multiple' component={MultiRouteComponent} />
+          <Route path='/chucknorris' component={ChuckNorrisJokeComponent}/>
+          <Route path='/login' component={LoginComponent}/>
           {/* the most powerful of the 3 models
         it allows us to pass whatever props from router we want, any of history location and match
         it also allows for us to pass in any other props */}
