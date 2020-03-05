@@ -16,6 +16,7 @@
     "@types/reactstrap": "^8.4.2",
     "@types/redux-thunk": "^2.1.0",
     "bootstrap": "^4.4.1",
+    "nodemon": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
