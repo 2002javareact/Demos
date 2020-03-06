@@ -14,6 +14,7 @@ import { store } from './Store';
 import  UserInfoComponent  from './components/user-info/UserInfoContainer';
 import { User } from './models/User';
 import  ViewAllUsersComponent  from './components/view-all-users-component/ViewAllUsersContainer';
+import  T3Component  from './components/t3-component/T3Container';
 
 // 1 a component is either a function or a class
 // 2 a component must start with a capital letter
@@ -46,6 +47,7 @@ function App() {
             <Route path='/login' component={LoginComponent} />
             <Route path='/user-info' component={UserInfoComponent}/>
             <Route path='/users' component={ViewAllUsersComponent}/>
+            <Route path='/tic-tac-toe' component={T3Component}/>
             {/* the most powerful of the 3 models
         it allows us to pass whatever props from router we want, any of history location and match
         it also allows for us to pass in any other props */}

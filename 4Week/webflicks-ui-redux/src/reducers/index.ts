@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { User } from "../models/User";
 import { loginReducer } from "./login-reducer";
 import { usersReducer } from "./users-reducer";
+import { t3Reducer } from "./t3-reducer";
 
 //make interfaces for each "piece" of state
 export interface ILoginState{
@@ -32,4 +33,5 @@ export interface IState{
 export const state = combineReducers<IState>({
     login: loginReducer,
     users: usersReducer,
+    t3: t3Reducer,
 })
