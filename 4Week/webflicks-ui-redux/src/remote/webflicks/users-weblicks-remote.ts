@@ -1,11 +1,12 @@
 import { InternalServerError } from "../../errors/InternalServerError"
+import { webflicksClient } from "./webflicks-client"
 
 
 export const webflicksGetAllUsers = async () => {
     try {
-        let response = await fetch('http://ec2-52-91-202-52.compute-1.amazonaws.com:2002/users')
+        let response = await webflicksClient.get('/users')
         if(response.status === 200){
-            return response.json()
+            return response.data
         }else {
             throw new InternalServerError()
         }

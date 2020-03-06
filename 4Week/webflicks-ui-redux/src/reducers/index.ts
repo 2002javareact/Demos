@@ -14,10 +14,18 @@ export interface IUsersState{
     errorMessage:string
 }
 
+export interface IT3State {
+    board: string[][]
+    whoTurns:boolean
+    winner:string
+    inProgress:boolean
+}
+
 //define all of the pieces of state
 export interface IState{
     login:ILoginState
     users:IUsersState
+    t3: IT3State
 }
 
 //turn all individual pieces of state into a single state

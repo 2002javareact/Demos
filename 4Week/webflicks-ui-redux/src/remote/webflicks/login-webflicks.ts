@@ -1,6 +1,7 @@
 import { User } from "../../models/User";
 import { BadCredentialsError } from "../../errors/BadCredentialsError";
 import { InternalServerError } from "../../errors/InternalServerError";
+import { webflicksClient } from "./webflicks-client";
 
 
 
@@ -10,24 +11,13 @@ export async function webflicksLogin(username: string, password: string): Promis
         password
     }
     try {
-
-
-        let response = await fetch('http://ec2-52-91-202-52.compute-1.amazonaws.com:2002/login', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-
-        })
+        let response = await webflicksClient.post('/login', credentials)
         console.log(response);
-
         if(response.status === 404){
             throw new BadCredentialsError()
         }
 
-        return await response.json()
+        return response.data
     } catch (e) {
         if(e.status === 404){
             throw e
