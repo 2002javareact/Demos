@@ -52,6 +52,9 @@ const NavBarComponent = (props:any) => {
                 <DropdownItem>
                 <Link to='/user-info'>User-Info</Link>
                 </DropdownItem>
+                <DropdownItem>
+                <Link to='/users'>View All Users</Link>
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import { store } from './Store';
 import  UserInfoComponent  from './components/user-info/UserInfoContainer';
 import { User } from './models/User';
+import  ViewAllUsersComponent  from './components/view-all-users-component/ViewAllUsersContainer';
 
 // 1 a component is either a function or a class
 // 2 a component must start with a capital letter
@@ -44,10 +45,12 @@ function App() {
             <Route path='/chucknorris' component={ChuckNorrisJokeComponent} />
             <Route path='/login' component={LoginComponent} />
             <Route path='/user-info' component={UserInfoComponent}/>
+            <Route path='/users' component={ViewAllUsersComponent}/>
             {/* the most powerful of the 3 models
         it allows us to pass whatever props from router we want, any of history location and match
         it also allows for us to pass in any other props */}
             <Route path='/' render={(props) => <MessageComponent history={props.history} match={props.match} location={props.location} message={'An example of the render design pattern for components'} />} />
+            
           </Switch>
 
         </Router>
