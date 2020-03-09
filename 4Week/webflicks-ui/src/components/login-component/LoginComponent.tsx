@@ -11,7 +11,11 @@ interface ILoginState {
     user: User | undefined
 }
 
-export class LoginComponent extends React.Component<any, ILoginState>{
+interface ILoginProps {
+    updateUser : (u:User)=>void
+}
+
+export class LoginComponent extends React.Component<ILoginProps, ILoginState>{
     constructor(props: any) {
         super(props)
         this.state = {
@@ -28,8 +32,8 @@ export class LoginComponent extends React.Component<any, ILoginState>{
         try {
             let user = await webflicksLogin(this.state.username, this.state.password)
            // this.props.history.push('/clicker') // if we run this, it takes them to that path
-            this.setState({
-                user: user,
+           this.props.updateUser(user) 
+           this.setState({
                 username: '',
                 password: ''
             })
