@@ -1,6 +1,8 @@
 package com.revature.objects;
 
-public class Car {
+import com.revature.carwash.Washable;
+
+public class Car implements Comparable<Car>, Washable{
 	int numberOfWheels;
 	String make;
 	String model;
@@ -53,13 +55,28 @@ public class Car {
 	
 	
 	public void wash() {
-		System.out.println("Your car is sparkly clean");
+		System.out.println("Your " + this.make+ " " + this.model + " is sparkly clean");
 	}
 	
 	@Override// this is called an annotation, some of them do things, this one does not
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "Wheels: " + this.numberOfWheels + " Make: " + this.make + " Model: " + this.model + " TopSpeed: " + this.topSpeed + " Doors: " + this.numberOfDoors;
+	}
+
+	
+	//This is how we define the natural ordering of objects
+	//so we implement the comparable interface and we can use the comparTo method to determine which car comes first
+	@Override
+	public int compareTo(Car o) {
+		// TODO Auto-generated method stub
+		if(this.id < o.id) {
+			return -1;
+		}else if (this.id > o.id) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 }
