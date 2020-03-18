@@ -1,10 +1,16 @@
 package com.revature.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+
 
 @Entity
 public class Cave {
@@ -22,6 +28,11 @@ public class Cave {
 	
 	private String type;
 
+	@OneToMany(mappedBy = "cave")
+	private List<Bear> inhabitants;
+
+	
+	
 	
 	
 	
@@ -59,23 +70,32 @@ public class Cave {
 		this.type = type;
 	}
 
-	public Cave(int caveId, double size, int numberOfResidents, String type) {
-		super();
-		this.caveId = caveId;
-		this.size = size;
-		this.numberOfResidents = numberOfResidents;
-		this.type = type;
+	public List<Bear> getInhabitants() {
+		return inhabitants;
 	}
 
-	public Cave() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setInhabitants(List<Bear> inhabitants) {
+		this.inhabitants = inhabitants;
 	}
 
 	@Override
 	public String toString() {
 		return "Cave [caveId=" + caveId + ", size=" + size + ", numberOfResidents=" + numberOfResidents + ", type="
-				+ type + "]";
+				+ type + ", inhabitants=" + "{}" + "]";
+	}
+
+	public Cave(int caveId, double size, int numberOfResidents, String type, List<Bear> inhabitants) {
+		super();
+		this.caveId = caveId;
+		this.size = size;
+		this.numberOfResidents = numberOfResidents;
+		this.type = type;
+		this.inhabitants = inhabitants;
+	}
+
+	public Cave() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -113,6 +133,10 @@ public class Cave {
 			return false;
 		return true;
 	}
+
+	
+	
+	
 	
 	
 	
