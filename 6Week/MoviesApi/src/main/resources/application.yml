@@ -1,0 +1,18 @@
+server:
+  port: 2002
+
+spring:
+  application:    name: movies-api
+  datasource:    driver-class-name: org.postgresql.Driver
+    initialization-mode: never
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:      ddl-auto: create
+    properties:      hibernate:
+        default-schema: ${DB_SCHEMA}
+    show-sql: true
+    
