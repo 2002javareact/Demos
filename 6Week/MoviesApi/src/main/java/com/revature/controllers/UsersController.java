@@ -1,7 +1,9 @@
-package com.revature.contollers;
+package com.revature.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.revature.annotations.Auth;
 import com.revature.dtos.Credentials;
 import com.revature.models.Users;
 import com.revature.services.UsersService;
@@ -55,6 +60,7 @@ public class UsersController {
 		return new ResponseEntity<Users>(us.getUserByID(id), HttpStatus.OK);
 	}
 
+	@Auth(roles = {"Admin"})
 	@PatchMapping
 	public ResponseEntity<Users> updateUser(@RequestBody Users u){// will try and turn the body into the object type on its right
 		if(u.getUserId() == 0) {
@@ -65,7 +71,11 @@ public class UsersController {
 	
 	@PostMapping("login")
 	public ResponseEntity<Users> login(@RequestBody Credentials cred){
-		return new ResponseEntity(us.loginUser(cred.getUsername(), cred.getPassword()), HttpStatus.OK);
+		HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		Users u = us.loginUser(cred.getUsername(), cred.getPassword());
+		// add an object to the session
+		req.getSession().setAttribute("user", u);
+		return new ResponseEntity(u, HttpStatus.OK);
 	}
 	
 }

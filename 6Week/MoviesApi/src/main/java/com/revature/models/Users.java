@@ -1,13 +1,18 @@
 package com.revature.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})// put this on all of your entities
@@ -27,6 +32,13 @@ public class Users {
 	
 	@Column(name = "last_name")
 	private String lastName;
+	
+	private String role;
+	
+	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+	@JsonManagedReference// you should use these annotations when using a bidirectional relationship, this one makes it The parent of the relationship so it always gets all the data
+	private List<Queue> queues;
 
 	public int getUserId() {
 		return userId;
@@ -68,13 +80,22 @@ public class Users {
 		this.lastName = lastName;
 	}
 
-	public Users(int userId, String username, String password, String firstName, String lastName) {
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Users(int userId, String username, String password, String firstName, String lastName, String role) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.role = role;
 	}
 
 	public Users() {
@@ -84,8 +105,8 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + "]";
+		return "Users [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", role=" + role + "]";
 	}
 
 	@Override
@@ -95,6 +116,7 @@ public class Users {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -124,6 +146,11 @@ public class Users {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
 		if (userId != other.userId)
 			return false;
 		if (username == null) {
@@ -133,8 +160,6 @@ public class Users {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 	
 }

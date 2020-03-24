@@ -1,4 +1,4 @@
-package com.revature.contollers;
+package com.revature.controllers;
 
 import java.util.List;
 
@@ -57,5 +57,6 @@ public class MoviesController {
 		}
 		return new ResponseEntity(ms.getById(id), HttpStatus.CREATED);
 	}
+	
 
 }
