@@ -1,0 +1,19 @@
+server:
+  port: 8085
+#default port is 8765
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:        git:          uri: https://github.com/Abatson/SpringCloudConfig
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8088/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+    
+

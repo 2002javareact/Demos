@@ -1,0 +1,14 @@
+server:
+  port: 8083
+spring:
+  application:    name: user-service
+    
+management:
+  endpoints:    web:      exposure:        include:        - "*"
+eureka:
+  client:
+    service-url:      defaultZone: http://localhost:8088/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+  

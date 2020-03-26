@@ -1,0 +1,16 @@
+spring:
+  application:    name: user-service
+  cloud:
+    config:
+      name: user-service
+      discovery:
+        enabled: true
+        service-id: config-service 
+
+eureka:
+  client:
+    service-url:      defaultZone: http://localhost:8088/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
+  
